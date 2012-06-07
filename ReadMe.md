@@ -15,6 +15,8 @@ In the end you have one api call serving as many clients as you can have sockets
 api.js has all the api methods, to call
 main.js is the server, it has the map of needs to api methods
 
-##usage
-npm install
-node main.js
+## Usage
+
+```bash
+npm install node main.js
+```
