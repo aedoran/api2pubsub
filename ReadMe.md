@@ -18,5 +18,5 @@ main.js is the server, it has the map of needs to api methods
 ## Usage
 
 ```bash
-npm install node main.js
+sudo node main.js
 ```
