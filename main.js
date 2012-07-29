@@ -1,9 +1,9 @@
 var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs')
-  , api = require('./api.js')
+  , api = require('./api.js');
 
-app.listen(80);
+app.listen(8000);
 
 io.set('log level',1);
 
@@ -18,25 +18,23 @@ var api_config = {
 };
 
 
-
-
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
   function (err, data) {
+    res.writeHead(200);
+    res.end(data);
+
     if (err) {
       res.writeHead(500);
       return res.end('Error loading index.html');
     }
-
-    res.writeHead(200);
-    res.end(data);
   });
 }
 
 io.sockets.on('connection', function (socket) {
   
-  socket.on("needs",function(data) {
-    console.log("Recieved needs:",data);
+  socket.on("needs", function(data) {
+    console.log("Recieved needs:", data);
     
     data.needs.forEach(function(need) {
       console.log(need);
@@ -45,12 +43,12 @@ io.sockets.on('connection', function (socket) {
       if (!need_cache[need]) {
       
         //create calls for need, and emit response on the data from the api
-        console.log("Making calls for "+need);
+        console.log("Making calls for " +need);
         need_cache[need] = 1;
-        api_config[need]({},function (err,data) {
-          console.log("Fullfilling need:"+need);
-          socket.emit(need,data);
-          socket.broadcast.emit(need,data);
+        api_config[need]({},function (err, data) {
+          console.log("Fullfilling need:" +need);
+          socket.emit(need, data);
+          socket.broadcast.emit(need, data);
         });
       }
     });
