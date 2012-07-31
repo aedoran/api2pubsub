@@ -1,7 +1,12 @@
 {
   "name": "api2pubsub",
+  "description": "pub/sub api calls in a snap",
   "version" : "0.0.1",
   "main" : "./main.js",
+  "repository": {
+  	"type": "git",
+  	"url": "https://github.com/aedoran/api2pubsub"
+  },
   "dependencies" : {
     "socket.io" : "latest"
   }
