@@ -1,35 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
 
-    <script src="socket.io/socket.io.js"></script>
-  </head>
+  <script src="socket.io/socket.io.js"></script>
+</head>
 
-  <body>
+<body>
 
-<script>
-	var socket = io.connect('http://localhost'); 
-  var date = new Date();
+  <script>
+  	var socket = io.connect('http://localhost'); 
+    var date = new Date();
 
-  socket.on('connect', function() {
-    console.log('Connected: ' + date);
-    socket.emit("needs",{needs:['appointment','alert']});
-  });
+    socket.on('connect', function() {
+      console.log('Connected: ' + date);
+      socket.emit("needs", {needs:['appointment','alert']});
+    });
 
-  socket.on('appointment', function (data) {
-    document.write(data.data + "<br>");
-  });
+    socket.on('appointment', function (data) {
+      document.write(data.data + "<br>");
+    });
 
-  socket.on('alert',function(data) {
-    console.log(data);
-  });
+    socket.on('alert', function(data) {
+      console.log(data);
+    });
 
-  socket.on('disconnect', function() {
-    console.log('Disconnected: ' + date);
-  });
+    socket.on('disconnect', function() {
+      console.log('Disconnected: ' + date);
+    });
+  </script>
 
-</script>
-
-  </body>
+</body>
 </html>
